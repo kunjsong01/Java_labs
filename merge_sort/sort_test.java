@@ -11,7 +11,19 @@ import java.util.Random;
 class run {
 
     public static void main(String[] args) {
-        tester t = new tester();
+        System.out.println("LAB1 - array merge sort ...");
+        int threads, size;
+        long seed;
+        
+        threads = Integer.parseInt(args[0]);
+        seed = Long.parseLong(args[1]);
+        size = Integer.parseInt(args[2]);
+        
+        System.out.println("Number of threads: " + threads + "\n" +
+                        "seed: " + seed + "\n" +
+                        "size of array: " + size);
+        
+        tester t = new tester(threads, seed, size);
         t.start();    
     }  
 }
@@ -20,39 +32,29 @@ class run {
 * A Tester class to test this merge sort program
 */
 class tester {
-    //public int myArr[] = {5, 160, 2, 87, 299, 150, 999};
-    public int size;
+    public int nThread;
+    public long randSeed;
+    public int arrSize;
+    
     public ArrayList<Integer> myArr = new ArrayList<>();
-    tester(){
-        System.out.println("LAB1 - array merge sort ...");
+    tester(int threads, long seed, int size){
+        this.nThread = threads;
+        this.randSeed = seed;
+        this.arrSize = size;
         // initialise the array list
         this.arr_init();
     }
     
     public void arr_init() {
-        int nThread = 0;
-        long randSeed = 0;
-        int arrSize = 0;
-        
-        System.out.println("Pleae enter the size of array, a rand seed: ");
-        // get array size from user inputs
-        Scanner in = new Scanner(System.in);
-        try {
-                arrSize = in.nextInt();
-                randSeed = in.nextLong();
-                in.close();
-        }
-        catch (InputMismatchException e) {
-            throw new InputMismatchException("Please enter an ");
-        }
         
         Random rand = new Random(randSeed);
         
-        // initialise the array
+        // initialise the array, print random numbers in the range of 1 - 1000
         for (int i=0; i<arrSize; i++) {
             this.myArr.add(rand.nextInt(1000 - 1) + 1);
         }
         
+        System.out.println("\n === Before sorting === \n");
         // print out original array
         for(int i = 0; i < arrSize; i++) {  
             if (i == (arrSize - 1)) {
@@ -73,17 +75,41 @@ class tester {
         
         System.out.println("\n === After sorting ===\n");
         
-        // print the sorted array
-        for(int i = 0; i < this.myArr.size(); i++) {  
+        if (this.seq_checker() == false) {
+            System.out.println("Array is NOT sorted!");
+        }
+        else {
+            // print the sorted array
+            System.out.println("Array is sorted!");
+            for(int i = 0; i < this.myArr.size(); i++) {  
+                if (i == (this.myArr.size() - 1)) {
+                    System.out.print(this.myArr.get(i) + " ");
+                }
+                else {
+                    System.out.print(this.myArr.get(i) + ", ");
+                }
+            }
+            System.out.println();        
+        }
+        
+        
+    }    
+    
+    public boolean seq_checker() {
+        for (int i=0; i<this.myArr.size(); i++) {
             if (i == (this.myArr.size() - 1)) {
-                System.out.print(this.myArr.get(i) + " ");
+                continue;
             }
             else {
-                System.out.print(this.myArr.get(i) + ", ");
+                if (this.myArr.get(i) > this.myArr.get(i + 1)) {
+                    System.out.println("Found " + i + "-th element is greater than " +
+                            (i+1) + "-th element! ");
+                    return false;
+                }
             }
         }
-        System.out.println();
-    }    
+        return true;
+    }
 }
 
 
