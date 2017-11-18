@@ -14,6 +14,7 @@ class run {
         System.out.println("LAB1 - array merge sort ...");
         int threads, size;
         long seed;
+        long startTime;
         
         threads = Integer.parseInt(args[0]);
         seed = Long.parseLong(args[1]);
@@ -23,8 +24,11 @@ class run {
                         "seed: " + seed + "\n" +
                         "size of array: " + size);
         
+        startTime = System.nanoTime();
         tester t = new tester(threads, seed, size);
-        t.start();    
+        t.start();
+        System.out.println("Total execution time: " + 
+                        (double)((System.nanoTime() - startTime)/100000000.0) + " seconds.");
     }  
 }
 
