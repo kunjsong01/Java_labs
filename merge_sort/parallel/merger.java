@@ -22,11 +22,8 @@ public class merger {
         // Traverse both array
         while (i<m && j <n)
         {
-            // Check if current element of first
-            // array is smaller than current element
-            // of second array. If yes, store first
-            // array element and increment first array
-            // index. Otherwise do same with second array
+            // compare the values in base array and target array and 
+            // insert them into the new temporary array by order
             if (baseArr.get(i) < arrToMerge.get(j))
                 tmpArr.add(baseArr.get(i++));
             else

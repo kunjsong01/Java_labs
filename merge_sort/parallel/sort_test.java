@@ -28,7 +28,7 @@ class run {
         startTime = System.nanoTime();
         tester t = new tester(threads, seed, size);
         t.start();
-        System.out.println("Total execution time: " + 
+        System.out.println("Total sorting time: " + 
                         (double)((System.nanoTime() - startTime)/100000000.0) + " seconds.");
     }  
 }
