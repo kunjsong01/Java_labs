@@ -6,10 +6,6 @@ package lab1;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author KSong
- */
 public class merger {
  
     /* Merges two arraylist of different sizes */

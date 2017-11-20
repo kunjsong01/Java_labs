@@ -7,10 +7,6 @@ package lab1;
 import java.util.ArrayList;
 import java.lang.Thread;
 
-/**
- *
- * @author KSong
- */
 public class sorter implements Runnable{
     // a private variable to hold
     private ArrayList<Integer> arr = new ArrayList<>();
